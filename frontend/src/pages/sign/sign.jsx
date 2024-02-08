@@ -49,7 +49,7 @@ export default function Sign() {
 }
 
 async function loginUser(user) {
-  const userData = await fetch("http://localhost:3001/api/user/login", {
+  const userData = await fetch("http://localhost:3001/api/v1/user/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
