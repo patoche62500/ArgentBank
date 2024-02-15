@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+import { setLogin } from "../../features/userProfile";
+
 import "./header.scss";
 
 export default function Header() {
+  const dispatch = useDispatch();
+  const login = useSelector((state) => state.user.bIsLogin);
+  const user = useSelector((state) => state.user.user);
   return (
     <header>
       <nav className="main-nav">
@@ -14,12 +20,22 @@ export default function Header() {
           />
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
-
         <div>
-          <Link to={"/sign"} className="main-nav-item">
-            <i className="fa fa-user-circle i-right"></i>
-            Sign In
-          </Link>
+          {login ? (
+            <Link
+              to={"/"}
+              className="main-nav-item"
+              onClick={() => dispatch(setLogin(false))}
+            >
+              <i className="fa fa-user-circle i-right"></i>{" "}
+              {`${user.firstName} Sign Out`}
+            </Link>
+          ) : (
+            <Link to={"/sign"} className="main-nav-item">
+              <i className="fa fa-user-circle i-right"></i>
+              Sign In
+            </Link>
+          )}
         </div>
       </nav>
     </header>

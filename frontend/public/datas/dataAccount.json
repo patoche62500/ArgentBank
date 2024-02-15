@@ -1,0 +1,41 @@
+[
+  {
+    "Account": [
+      {
+        "h3": "Argent Bank Checking (x8349)"
+      },
+      {
+        "p": "$2,082.79"
+      },
+      {
+        "p2": "Available Balance"
+      }
+    ]
+  },
+  {
+    "Account": [
+      {
+        "h3": "Argent Bank Savings (x6712)"
+      },
+      {
+        "p": "$10,928.42"
+      },
+      {
+        "p2": "Available Balance"
+      }
+    ]
+  },
+  {
+    "Account": [
+      {
+        "h3": "Argent Bank Credit Card (x8349)"
+      },
+      {
+        "p": "$184.30"
+      },
+      {
+        "p2": "Current Balance"
+      }
+    ]
+  }
+]
