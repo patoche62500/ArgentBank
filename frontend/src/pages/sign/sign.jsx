@@ -6,6 +6,7 @@ import "./sign.scss";
 
 export default function Sign() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       try {

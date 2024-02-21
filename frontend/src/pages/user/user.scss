@@ -42,3 +42,14 @@
     flex-direction: row;
   }
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  li {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+  }
+}

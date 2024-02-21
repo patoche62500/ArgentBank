@@ -15,6 +15,7 @@ export default function User() {
   const login = useSelector((state) => state.user.bIsLogin);
 
   //console.log(login);
+  //console.log(userProfile);
 
   if (!login) {
     //console.log("redirect");
@@ -55,6 +56,7 @@ export default function User() {
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+
     const updatedUser = {
       userName: data.userProfile,
     };
@@ -71,7 +73,7 @@ export default function User() {
 
   async function updateUser(user) {
     try {
-      // Effectuez une requête AJAX pour mettre à jour l'utilisateur
+      // Effectuez une requête pour mettre à jour l'utilisateur
       const response = await fetch(
         "http://localhost:3001/api/v1/user/profile",
         {
@@ -109,15 +111,43 @@ export default function User() {
         </h1>
         {bdisplayFormEdit ? (
           <>
-            <button
-              className="edit-button"
-              onClick={() => setbdisplayFormEdit(false)}
-            >
-              Cancel
-            </button>
             <form id="formulaire" onSubmit={handleChange}>
-              <input type="text" id="userProfile" name="userProfile" />
-              <input type="submit" value="Modifier" />
+              <ul className="form">
+                <li>Edit user Info</li>
+                <li>
+                  <label htmlFor="userProfile">User name:</label>
+                  <input type="text" id="userProfile" name="userProfile" />
+                </li>
+                <li>
+                  <label htmlFor="firstName">First name:</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value={userProfile.firstName}
+                    disabled
+                  />
+                </li>
+                <li>
+                  <label htmlFor="lastName">Last name:</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={userProfile.lastName}
+                    disabled
+                  />
+                </li>
+                <li>
+                  <input className="edit-button" type="submit" value="Save" />
+                  <button
+                    className="edit-button"
+                    onClick={() => setbdisplayFormEdit(false)}
+                  >
+                    Cancel
+                  </button>
+                </li>
+              </ul>
             </form>
           </>
         ) : (
