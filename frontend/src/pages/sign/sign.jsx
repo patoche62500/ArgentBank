@@ -11,7 +11,7 @@ export default function Sign() {
       try {
         const userProfile = await getProfileUser();
         dispatch(setUser(userProfile));
-        // dispatch(setLogin(true));
+        dispatch(setLogin(true));
         //console.log(user);
       } catch (error) {
         console.error(

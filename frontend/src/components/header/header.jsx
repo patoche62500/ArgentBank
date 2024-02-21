@@ -22,14 +22,25 @@ export default function Header() {
         </Link>
         <div>
           {login ? (
-            <Link
-              to={"/"}
-              className="main-nav-item"
-              onClick={() => dispatch(setLogin(false))}
-            >
-              <i className="fa fa-user-circle i-right"></i>{" "}
-              {`${user.firstName} Sign Out`}
-            </Link>
+            <>
+              <Link
+                to={"/"}
+                className="main-nav-item"
+                onClick={() => dispatch(setLogin(false))}
+              >
+                <i className="fa fa-user-circle i-right"></i>
+                {user?.userName}
+              </Link>
+
+              <Link
+                to={"/"}
+                className="main-nav-item"
+                onClick={() => dispatch(setLogin(false))}
+              >
+                <i class="fa fa-sign-out"></i>
+                Sign Out
+              </Link>
+            </>
           ) : (
             <Link to={"/sign"} className="main-nav-item">
               <i className="fa fa-user-circle i-right"></i>

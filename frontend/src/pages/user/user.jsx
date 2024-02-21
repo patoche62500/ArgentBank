@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { redirect } from "react-router-dom";
+import { redirect, Navigate } from "react-router-dom";
 import { setName, setLogin } from "../../features/userProfile";
 import Account from "../../components/account/account";
 
@@ -12,7 +12,14 @@ export default function User() {
   const [bdisplayFormEdit, setbdisplayFormEdit] = useState(false);
   // recupere l'user dans le store depuis la variable user
   const userProfile = useSelector((state) => state.user.user);
+  const login = useSelector((state) => state.user.bIsLogin);
 
+  //console.log(login);
+
+  if (!login) {
+    //console.log("redirect");
+    return <Navigate to="/" />;
+  }
   //console.log(user);
 
   useEffect(() => {
@@ -40,7 +47,7 @@ export default function User() {
     // Appelez la fonction asynchrone pour charger les données
 
     chargerDonnees();
-    dispatch(setLogin(true));
+    //dispatch(setLogin(true));
   }, []);
 
   async function handleChange(e) {
@@ -82,8 +89,8 @@ export default function User() {
         console.error("Échec de la mise à jour :", response.statusText);
         return false;
       }
-      dispatch(setName(user));
-      console.log("updated");
+      dispatch(setName(user.userName));
+      console.log("updated", user);
       // La mise à jour est réussie
       return true;
     } catch (error) {
