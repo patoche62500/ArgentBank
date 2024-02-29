@@ -10,14 +10,15 @@ const userProfile = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
-      console.log("Store : ", state.user);
+      //console.log("Store : ", state.user);
     },
     setName: (state, action) => {
       state.user.userName = action.payload;
-      console.log("update name : ", state.user.userName);
+      //console.log("update name : ", state.user.userName);
     },
     setLogin: (state, action) => {
       state.bIsLogin = action.payload;
+      //console.log(" login : ", state.user.bIsLogin);
     },
   },
 });

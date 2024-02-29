@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { redirect, Navigate } from "react-router-dom";
-import { setName, setLogin } from "../../features/userProfile";
+import { redirect, Navigate, useLoaderData } from "react-router-dom";
+import { setName, setLogin, setUser } from "../../features/userProfile";
 import Account from "../../components/account/account";
 
 import "./user.scss";
 
+export async function loader() {
+  const profile = await getProfileUser(window.sessionStorage.getItem("userId"));
+  const reponse = await fetch("/datas/dataAccount.json");
+  const donneesJSON = await reponse.json();
+  console.log(donneesJSON);
+  if (profile === undefined) {
+    return redirect("/");
+  }
+
+  return { profile, donneesJSON };
+}
+
 export default function User() {
+  const { profile, donneesJSON } = useLoaderData();
   const dispatch = useDispatch();
   const [donnees, setDonnees] = useState(null);
   const [bdisplayFormEdit, setbdisplayFormEdit] = useState(false);
@@ -16,39 +29,20 @@ export default function User() {
 
   //console.log(login);
   //console.log(userProfile);
-
+  /*
   if (!login) {
     //console.log("redirect");
     return <Navigate to="/" />;
   }
+  */
   //console.log(user);
 
   useEffect(() => {
-    // Fonction asynchrone pour charger les données
-    const chargerDonnees = async () => {
-      try {
-        // Chargez le fichier JSON
-        const reponse = await fetch("/datas/dataAccount.json");
-
-        if (!reponse.ok) {
-          throw new Error("Erreur lors du chargement du fichier JSON");
-        }
-
-        // Convertissez la réponse en JSON
-        const donneesJSON = await reponse.json();
-        //console.log("Données récupérées :", donneesJSON);
-
-        // Mettez à jour l'état avec les données récupérées
-        setDonnees(donneesJSON);
-      } catch (erreur) {
-        console.error("Erreur :", erreur);
-      }
-    };
-
-    // Appelez la fonction asynchrone pour charger les données
-
-    chargerDonnees();
-    //dispatch(setLogin(true));
+    if (profile != undefined) {
+      dispatch(setUser(profile));
+      dispatch(setLogin(true));
+      setDonnees(donneesJSON);
+    }
   }, []);
 
   async function handleChange(e) {
@@ -167,4 +161,35 @@ export default function User() {
       ))}
     </main>
   );
+}
+
+async function getProfileUser(token) {
+  console.log(token);
+  try {
+    const userData = await fetch("http://localhost:3001/api/v1/user/profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const userDataJson = await userData.json();
+
+    // Vérifiez la réponse du serveur
+    if (userData.ok) {
+      console.log("user profile", userDataJson.body);
+
+      // Faites quelque chose avec les données userDataJson si nécessaire
+      return userDataJson.body;
+      //return true;
+    } else {
+      console.log("Erreur lors de la récupération du profil utilisateur");
+      //return false;
+    }
+  } catch (error) {
+    console.error("Une erreur s'est produite lors de la requête :", error);
+    // Gérez les erreurs si nécessaire
+    //return false;
+  }
 }

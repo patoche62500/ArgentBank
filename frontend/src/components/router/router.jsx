@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../../pages/layout";
 import Home from "../../pages/home/home.jsx";
 import Sign, { action as signInAction } from "../../pages/sign/sign.jsx";
-import User from "../../pages/user/user.jsx";
+import User, { loader as loaderUser } from "../../pages/user/user.jsx";
 
 // Configuration du routeur normal pour le site en ligne
 const router = createBrowserRouter([
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <User />,
+        loader: loaderUser,
       },
       {
         path: "/sign",

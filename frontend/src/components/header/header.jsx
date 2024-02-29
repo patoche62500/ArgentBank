@@ -9,6 +9,12 @@ export default function Header() {
   const dispatch = useDispatch();
   const login = useSelector((state) => state.user.bIsLogin);
   const user = useSelector((state) => state.user.user);
+
+  function disconnect() {
+    window.sessionStorage.clear();
+    dispatch(setLogin(false));
+  }
+
   return (
     <header>
       <nav className="main-nav">
@@ -24,19 +30,15 @@ export default function Header() {
           {login ? (
             <>
               <Link
-                to={"/"}
+                to={"/user"}
                 className="main-nav-item"
-                onClick={() => dispatch(setLogin(false))}
+                //onClick={() => dispatch(setLogin(false))}
               >
                 <i className="fa fa-user-circle i-right"></i>
                 {user?.userName}
               </Link>
 
-              <Link
-                to={"/"}
-                className="main-nav-item"
-                onClick={() => dispatch(setLogin(false))}
-              >
+              <Link to={"/"} className="main-nav-item" onClick={disconnect}>
                 <i class="fa fa-sign-out"></i>
                 Sign Out
               </Link>

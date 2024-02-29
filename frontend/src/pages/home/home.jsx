@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+// composant
 import FeatureItem from "../../components/featureItem/featureItem";
-
+// style page home
 import "./home.scss";
 
 export default function Home() {
@@ -44,6 +45,7 @@ export default function Home() {
       </div>
       <section className="features">
         <h2 className="sr-only">Features</h2>
+        {/* Création de plusieurs composants feature items */}
         {donnees?.map((e, idx) => (
           <div key={idx} className="feature-item">
             <FeatureItem donnee={e.feature} />

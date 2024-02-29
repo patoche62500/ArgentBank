@@ -107,7 +107,7 @@ paths:
         - Bearer: []
       tags:
         - User Module
-      summary: User Transactions
+      summary: Return User Transactions
       description: API for transaction
       parameters:
         - in: header
@@ -119,33 +119,32 @@ paths:
         - application/json
       responses:
         "200":
-          description: Transaction retrieve Successfully
+          description: Returns an array of transactions
           schema:
             $ref: "#/definitions/Transactions"
         "400":
-          description: Invalid Fields
+          description: Invalid Token
         "500":
           description: Internal Server Error
-  /user/transaction:
+  /user/transaction/{id}:
     post:
       security:
         - Bearer: []
       tags:
         - User Module
-      summary: User Transaction by ID
+      summary: Return User details Transaction by ID
       description: API for transaction
       parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
         - in: header
           name: Authorization
           description: Token
           required: true
           type: string
-        - in: body
-          name: body
-          description: Transaction Payload
-          required: true
-          schema:
-            $ref: "#/definitions/TransactionId"
+
       produces:
         - application/json
       responses:
@@ -153,8 +152,10 @@ paths:
           description: return transaction detail Successfully
           schema:
             $ref: "#/definitions/TransactionIdResponse"
+        "300":
+          description: Invalid Token
         "400":
-          description: Invalid Fields
+          description: Invalid ID
         "500":
           description: Internal Server Error
     put:
@@ -165,6 +166,10 @@ paths:
       summary: Modify Category & Note
       description: API for transaction
       parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
         - in: header
           name: Authorization
           description: Token
@@ -181,17 +186,19 @@ paths:
       responses:
         "200":
           description: Updated Successfully
+        "300":
+          description: Invalid Token
         "400":
-          description: Invalid Fields
+          description: Invalid ID
         "500":
           description: Internal Server Error
-  /user/category:
+  /category:
     post:
       security:
         - Bearer: []
       tags:
         - User Module
-      summary: User Transaction Category
+      summary: Return all User Transaction Category
       description: API for transaction
       parameters:
         - in: header
@@ -207,7 +214,7 @@ paths:
           schema:
             $ref: "#/definitions/Category"
         "400":
-          description: Invalid Fields
+          description: Invalid Token
         "500":
           description: Internal Server Error
 securityDefinitions:
@@ -282,11 +289,6 @@ definitions:
         type: integer
       balance:
         type: integer
-  TransactionId:
-    type: object
-    properties:
-      id:
-        type: integer
   TransactionIdResponse:
     type: object
     properties:
@@ -301,8 +303,6 @@ definitions:
   TransactionModify:
     type: object
     properties:
-      id:
-        type: integer
       category:
         type: string
       note:
