@@ -10,7 +10,7 @@ export async function loader() {
   const profile = await getProfileUser(window.sessionStorage.getItem("userId"));
   const reponse = await fetch("/datas/dataAccount.json");
   const donneesJSON = await reponse.json();
-  console.log(donneesJSON);
+  //console.log(donneesJSON);
   if (profile === undefined) {
     return redirect("/");
   }
@@ -86,7 +86,7 @@ export default function User() {
         return false;
       }
       dispatch(setName(user.userName));
-      console.log("updated", user);
+      //console.log("updated", user);
       // La mise à jour est réussie
       return true;
     } catch (error) {
@@ -164,7 +164,7 @@ export default function User() {
 }
 
 async function getProfileUser(token) {
-  console.log(token);
+  //console.log(token);
   try {
     const userData = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "POST",
@@ -178,7 +178,7 @@ async function getProfileUser(token) {
 
     // Vérifiez la réponse du serveur
     if (userData.ok) {
-      console.log("user profile", userDataJson.body);
+      //console.log("user profile", userDataJson.body);
 
       // Faites quelque chose avec les données userDataJson si nécessaire
       return userDataJson.body;
