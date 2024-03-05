@@ -75,7 +75,7 @@ export default function User() {
           headers: {
             "Content-Type": "application/json",
             // Autres en-têtes nécessaires (peut inclure le jeton d'authentification, etc.)
-            Authorization: `Bearer ${window.localStorage.getItem("userId")}`,
+            Authorization: `Bearer ${window.sessionStorage.getItem("userId")}`,
           },
           body: JSON.stringify(user),
         }
