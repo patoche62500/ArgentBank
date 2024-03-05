@@ -21,6 +21,7 @@ export default function Sign() {
             <input type="checkbox" id="remember-me" name="rememberMe" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
+          <p className="error">L'email ou le mot de passe est invalide</p>
           <button type="submit" className="sign-in-button">
             Sign In
           </button>
@@ -46,7 +47,17 @@ export async function action({ request }) {
 
   const login = await loginUser(user);
 
-  return login ? redirect("/user") : null;
+  return login ? redirect("/user") : error();
+}
+
+function error() {
+  const error = document.querySelector(".error");
+  if (error) {
+    error.className = "error--visible";
+    return true;
+  } else {
+    return false;
+  }
 }
 
 async function loginUser(user) {
@@ -68,6 +79,7 @@ async function loginUser(user) {
     //console.log(userDataJson.userId, userDataJson.token);
   } else {
     //console.log("error login");
+
     return false;
   }
 }
