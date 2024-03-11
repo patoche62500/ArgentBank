@@ -39,7 +39,7 @@ export default function Header() {
               </Link>
 
               <Link to={"/"} className="main-nav-item" onClick={disconnect}>
-                <i class="fa fa-sign-out"></i>
+                <i className="fa fa-sign-out"></i>
                 Sign Out
               </Link>
             </>
