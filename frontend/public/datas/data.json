@@ -2,7 +2,7 @@
   {
     "feature": [
       {
-        "src": "/img/icon-chat.png"
+        "src": "/img/icon-chat.webp"
       },
       {
         "h3": "You are our #1 priority"
@@ -15,7 +15,7 @@
   {
     "feature": [
       {
-        "src": "/img/icon-money.png"
+        "src": "/img/icon-money.webp"
       },
       {
         "h3": " More savings means higher rates"
@@ -28,7 +28,7 @@
   {
     "feature": [
       {
-        "src": "/img/icon-security.png"
+        "src": "/img/icon-security.webp"
       },
       {
         "h3": "Security you can trust"
